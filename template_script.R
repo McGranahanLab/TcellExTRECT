@@ -1,8 +1,7 @@
 ###############################################################################
 ### TIL-ExTRECT TCRA score generation - GC correction                       ###
-### Template with annotation                                                ###
+### Legacy template with annotation                                         ###
 ###                                                                         ###
-### February 18th 2021 - Bobby Bentham                                      ###
 ###############################################################################
 
 # Libraries needed

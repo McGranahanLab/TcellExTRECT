@@ -8,7 +8,6 @@
 
 library(TcellExTRECT)
 
-setwd('/camp/project/proj-tracerx-lung/tctProjects/mcgranahanLab/rbentham/papers/TCRA_publication/')
 
 # Things to put into a data file ----
 seg.list <- list()
@@ -16,7 +15,7 @@ seg.list[['TCRA']]  <- data.frame(segName = c('all','focal', 'local1','local2'),
                                   start = c(22090057, 22800000, 22090057, 23016447),
                                   end = c(23221076, 22880000, 22298223, 23221076))
 
-TCRA.exons <- readRDS('/camp/project/proj-tracerx-lung/tctProjects/mcgranahanLab/rbentham/papers/TCRA_2020/data/sureselect_TCRA_exons_hg19.RDS')
+TCRA.exons <- readRDS('data/sureselect_TCRA_exons_hg19.RDS')
 TCRA.exons <- TCRA.exons %>%
   dplyr::select(X1=chr,X2=start,X3=stop) %>% distinct()
 
@@ -24,12 +23,12 @@ vdj.chr.df <- data.frame(gene = c('TCRA','TCRB','TCRG','IGH','IGL','IGK'),
                          chr = c('chr14','chr7','chr7','chr14','chr22','chr2'))
 
 # FASTA file of TCRA gene used for gc correction
-TCRA.fasta <- read.fasta(file = "/camp/project/proj-tracerx-lung/tctProjects/mcgranahanLab/rbentham/papers/TCRA_publication/code/METsPrimary/TCRA.fasta")
+TCRA.fasta <- read.fasta(file = "data/TCRA.fasta")
 
 # Main script ----
 
 # Need input (skip generation of cov.output.file for now)
-cov.output.file  <- '/camp/project/proj-tracerx-lung/tctProjects/mcgranahanLab/rbentham/papers/TCRA_2020/data/TCRAscoresOut/A_LTX021_BS_GL_TCRA.txt'
+cov.output.file  <- 'data/example_TCRA.txt'
 
 # This should be region of TCRA gene
 vdj.region.df <- read_tsv(cov.output.file, col_names = FALSE)
