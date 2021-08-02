@@ -12,24 +12,24 @@ getLogRdf <-  function(region.df, segs, minCov = 0){
   col.sym <- rlang::sym(col_input)
   # For random locations with no VDJ effect use beginning and end of TCRA
   tumour.random.covs1 <- region.df %>%
-    filter(pos <= segs[3,]$end) %>%
-    filter(reads >=  minCov) %>% dplyr::select(!!col.sym) %>% `[[`(1)
+    dplyr::filter(pos <= segs[3,]$end) %>%
+    dplyr::filter(reads >=  minCov) %>% dplyr::select(!!col.sym) %>% `[[`(1)
   tumour.random.covs2 <- region.df %>%
-    filter(pos >= segs[4,]$start) %>%
-    filter(reads >=  minCov) %>% dplyr::select(!!col.sym) %>% `[[`(1)
+    dplyr::filter(pos >= segs[4,]$start) %>%
+    dplyr::filter(reads >=  minCov) %>% dplyr::select(!!col.sym) %>% `[[`(1)
   tumour.random.covs <- c(tumour.random.covs1, tumour.random.covs2)
   # Use median of these values for normalisation to get "logR"
   n1 <- median(tumour.random.covs)
 
   # Select coverage values across TCRA
   tumour.test.covs1 <- region.df %>%
-    filter(pos >= segs[1,]$start & pos <= segs[1,]$end) %>%
-    filter(reads >=  minCov) %>% dplyr::select(!!col.sym) %>% `[[`(1)
+    dplyr::filter(pos >= segs[1,]$start & pos <= segs[1,]$end) %>%
+    dplyr::filter(reads >=  minCov) %>% dplyr::select(!!col.sym) %>% `[[`(1)
 
   # Select positions
   tumour.test.covs.pos <- region.df %>%
-    filter(pos >= segs[1,]$start & pos <= segs[1,]$end) %>%
-    filter(reads >=  minCov) %>% dplyr::select(pos) %>% `[[`(1)
+    dplyr::filter(pos >= segs[1,]$start & pos <= segs[1,]$end) %>%
+    dplyr::filter(reads >=  minCov) %>% dplyr::select(pos) %>% `[[`(1)
 
   # Adjust for bin width
   # tumour.test.covs.pos <- tumour.test.covs.pos + bin.width/2

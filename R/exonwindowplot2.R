@@ -12,7 +12,7 @@ exonwindowplot2 <- function(exon.loc, inputseq, extend1){
   chunkGCs <- numeric(n)
   for (i in 1:n) {
     chunk <- inputseq[(exon.loc[[i]][1]-extend1):c(exon.loc[[i]][2] + extend1)]
-    chunkGC <- GC(chunk)
+    chunkGC <- seqinr::GC(chunk)
     chunkGCs[i] <- chunkGC
   }
   #plot(seq(n),chunkGCs,type="b",xlab="Exon",ylab="GC content")

@@ -1,0 +1,91 @@
+---
+title: "Introduction to T Cell ExTRECT"
+author: 
+   name: "Robert Bentham"
+   affiliation: "Cancer Institute, University College London"
+   email: "robert.bentham.11@ucl.ac.uk"
+date: "2021-08-02"
+output: 
+  html_document:
+    toc_float: true
+vignette: >
+  %\VignetteIndexEntry{Introduction to T Cell ExTRECT}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+abstract: T Cell Exome TREC Tool (T Cell ExTRECT) is an R package to calculate T cell fractions from WES data from hg19 or hg38 aligned genomes.
+package: |
+  TCellExTRECT 1.0.0
+  Report issues to TCellExTRECT@gmail.com
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# T cell ExTRECT
+
+Running T cell ExTRECT on your data is both fast and easy!
+
+```{r, results = "hide",warning = FALSE,message=FALSE}
+library(TcellExTRECT)
+```
+
+First take an aligned bam file (hg38 or hg19) of your choice
+
+```{r}
+example_bam <- '/path/to/file.bam'
+```
+
+Then use the pre-defined *TCRA* gene segments in the `tcra_seg_hg19` or `tcra_seg_hg38` data file to extract the coverage values. 
+
+```{r}
+data("tcra_seg_hg19")
+```
+
+```{r,eval = FALSE}
+cov.file <- getCovFromBam(bamPath = example_bam,
+                          outPath = '',
+                          vdj.seg = tcra_seg_hg19)
+cov_df <- loadCov(cov.file)
+```
+
+The `cov.df` object should be a data frame with two columns names `pos` (position on chr14) and `reads` (number of coverage reads). The function getCovFromBam calls samtools so that will need to be installed! Alternatively extract the coverage in the TCRA region using your own method and load before preceding.
+
+
+Once the coverage values have been loaded you can run TCellExTRECT with the following function:
+
+```{r}
+data(TCRA_exons_hg19)
+data(cov_example)
+
+TCRA.out <- runTcellExTRECT(cov_example, TCRA_exons_hg19, tcra_seg_hg19, 'hg19')
+TCRA.out
+```
+
+The `cov_example` data frame is an inbuild example of coverage reads from the *TCRA* locus. Different capture kits have different exon positions and not all capture kits cover the *TCRA* locus. The `TCRA_exons_hg19` data contains exon locations from the Agilent v4/5 exome capture kits for genomes aligned to hg38. The TCellExTRECT package also comes with data for hg38 Agilent v4/5 genomes (`TCRA_exons_hg38`) and an exon set for Nimblegen kits `TCRA_exons_nimblegen_hg19`, more will be added soon!
+
+We can also visualise the calculate log ratio from T Cell ExTRECT, this can be very useful to check that everything is working.
+
+```{r}
+plotTcellExTRECT(cov_example, TCRA_exons_hg19,
+                tcra_seg_hg19,'hg19', sample_name = 'TEST')
+```
+
+This will plot both the pre and post GC corrected versions. 
+
+Finally the TCRA T cell fractions can be adjusted for tumour copy number and purity with the following function:
+
+```{r}
+TCRA.out <- adjustTcellExTRECT(TCRA.out, purity = 0.5, TCRA.cn = 3)
+TCRA.out
+```
+
+
+
+# Session Info {-}
+
+```{r session_info, include=TRUE, echo=TRUE, results='markup'}
+devtools::session_info()
+```
+
+

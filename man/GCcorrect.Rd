@@ -9,7 +9,7 @@ GCcorrect(
   exons,
   exonList,
   gene.fasta,
-  gene.fasta.start,
+  hg19_or38 = "hg19",
   sliding = 1000
 )
 }

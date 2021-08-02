@@ -13,9 +13,9 @@ baselineAdj <- function(vdj_logR_input, vdj_seg, GCcorrect = TRUE){
   ratio.col <- rlang::sym(ratio.col)
 
   adjust.baseline.value <- vdj_logR_input %>%
-    filter((pos >= vdj_seg[3,'start'] & pos <= vdj_seg[3,'end']) |
+    dplyr::filter((pos >= vdj_seg[3,'start'] & pos <= vdj_seg[3,'end']) |
              (pos >= vdj_seg[4,'start'] & pos <= vdj_seg[4,'end'])) %>%
-    summarise(gc.adjust = mean(!!ratio.col),
+    dplyr::summarise(gc.adjust = mean(!!ratio.col),
               CI.95.range = 1.96*sd(!!ratio.col)/sqrt(length(!!ratio.col)))
 
   # Look at focal too in GAM model

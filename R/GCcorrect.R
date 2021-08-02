@@ -21,12 +21,12 @@ GCcorrect <- function(tumour.logR, exons , exonList, gene.fasta, hg19_or38 = 'hg
   get_gc_prediction <- function(x){mgcv::predict.gam(gam.model, newdata = data.frame(pos = x))}
 
   tumour.logR <- tumour.logR %>%
-    mutate(exon = exonPosFun_v(pos, exons)) %>%
-    left_join(exonList, 'exon') %>%
+    dplyr::mutate(exon = exonPosFun_v(pos, exons)) %>%
+    dplyr::left_join(exonList, 'exon') %>%
     dplyr::rename(exon.gc = GC) %>%
-    mutate(exon.gc2 = exon.gc^2) %>%
-    mutate(smooth.gc = get_gc_prediction(pos))  %>%
-    mutate(smooth.gc2 = smooth.gc^2)
+    dplyr::mutate(exon.gc2 = exon.gc^2) %>%
+    dplyr::mutate(smooth.gc = get_gc_prediction(pos))  %>%
+    dplyr::mutate(smooth.gc2 = smooth.gc^2)
 
 
   gc.lm = lm(Ratio ~ exon.gc + exon.gc2 + smooth.gc + smooth.gc2,

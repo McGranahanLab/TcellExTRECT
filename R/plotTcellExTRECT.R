@@ -74,7 +74,7 @@ plotTcellExTRECT <- function(vdj.region.df, exons.selected,
   # Also add in segment info
   data(TCRA_segments)
   vdj.logR.df  <-vdj.logR.df  %>%
-    mutate(TRA_segment = TRA_segment_find_v(pos, hg19_or_38))
+    dplyr::mutate(TRA_segment = TRA_segment_find_v(pos, hg19_or_38))
 
   vdj.logR.df$TRA_segment_short <- gsub('-','',gsub('[0-9]*','',
                                                     gsub('TR','',
@@ -85,28 +85,28 @@ plotTcellExTRECT <- function(vdj.region.df, exons.selected,
                    "None" = 'lightgrey')
 
   p1 <- vdj.logR.df %>%
-    ggplot(aes(pos, Ratio)) +
-    geom_point(aes(col = TRA_segment_short)) + geom_smooth() +
-    theme_bw() +
-    scale_colour_manual(name = 'VDJ segment', values =custom.cols  ) +
-    ggtitle(paste0(sample_name,': pre GC correction'))+
-    ylab('Ratio') + xlab('Chr14 position') +
-    geom_vline(aes(xintercept =vdj.seg[which(vdj.seg$segName == 'focal'), 'start']),
+    ggplot2::ggplot(ggplot2::aes(pos, Ratio)) +
+    ggplot2::geom_point(ggplot2::aes(col = TRA_segment_short)) + ggplot2::geom_smooth() +
+    ggplot2::theme_bw() +
+    ggplot2::scale_colour_manual(name = 'VDJ segment', values =custom.cols  ) +
+    ggplot2::ggtitle(paste0(sample_name,': pre GC correction'))+
+    ggplot2::ylab('Ratio') + ggplot2::xlab('Chr14 position') +
+    ggplot2::geom_vline(ggplot2::aes(xintercept =vdj.seg[which(vdj.seg$segName == 'focal'), 'start']),
              col = 'red', linetype = 'dashed') +
-    geom_vline(aes(xintercept =vdj.seg[which(vdj.seg$segName == 'focal'), 'end']),
+    ggplot2::geom_vline(ggplot2::aes(xintercept =vdj.seg[which(vdj.seg$segName == 'focal'), 'end']),
                col = 'red', linetype = 'dashed')
 
   p2 <- vdj.logR.df %>%
-    ggplot(aes(pos, Ratio.gc.correct)) +
-    geom_point(aes(col = TRA_segment_short)) + geom_smooth() +
-    scale_colour_manual(name = 'VDJ segment', values = custom.cols  ) +
-    ggtitle(paste0(sample_name,': post GC correction'))+
-    ylab('Ratio (GC corrected)') + xlab('Chr14 position') +
-    geom_vline(aes(xintercept =vdj.seg[which(vdj.seg$segName == 'focal'), 'start']),
+    ggplot2::ggplot(ggplot2::aes(pos, Ratio.gc.correct)) +
+    ggplot2::geom_point(ggplot2::aes(col = TRA_segment_short)) + ggplot2::geom_smooth() +
+    ggplot2::scale_colour_manual(name = 'VDJ segment', values = custom.cols  ) +
+    ggplot2::ggtitle(paste0(sample_name,': post GC correction'))+
+    ggplot2::ylab('Ratio (GC corrected)') + ggplot2::xlab('Chr14 position') +
+    ggplot2::geom_vline(ggplot2::aes(xintercept =vdj.seg[which(vdj.seg$segName == 'focal'), 'start']),
                col = 'red', linetype = 'dashed') +
-    geom_vline(aes(xintercept =vdj.seg[which(vdj.seg$segName == 'focal'), 'end']),
+    ggplot2::geom_vline(ggplot2::aes(xintercept =vdj.seg[which(vdj.seg$segName == 'focal'), 'end']),
                col = 'red', linetype = 'dashed') +
-    theme_bw()
+    ggplot2::theme_bw()
 
   print(p1)
   print(p2)
