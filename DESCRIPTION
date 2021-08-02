@@ -5,6 +5,7 @@ Version: 0.1.0
 Author: Robert Bentham
 Maintainer: Robert Bentham <robert.bentham.11@ucl.ac.uk>
 Description: Compute fraction of T cells in exome data
+VignetteBuilder: knitr
 Depends:
     R (>= 3.3) 
 Imports:
@@ -17,7 +18,9 @@ Imports:
     ggplot2,
     magrittr
 Suggests:
-    devtools
+    devtools, 
+    knitr,
+    rmarkdown
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
