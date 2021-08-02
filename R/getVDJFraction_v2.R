@@ -19,7 +19,7 @@ getVDJFraction_upd2 <- function(tumour.logR, segs,norm.ci.95, GC.correct = FALSE
   focal.start <- segs[2,2]
   focal.end <- segs[2,3]
 
-  fit.model <- gratia::confint.gam(tumour.genomic.region.model, parm = "s(pos)",
+  fit.model <- gratia:::confint.gam(tumour.genomic.region.model, parm = "s(pos)",
                                    partial_match = TRUE, type = ci_type,
                        newdata = seq(segs[2,2], segs[2,3],by=100), shift = TRUE)
   fit.loc <- which(fit.model$pos > focal.start & fit.model$pos < focal.end)

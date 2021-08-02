@@ -5,7 +5,6 @@
 #' @param GC.correct Whether to use GC corrected value or not
 #' @return VDJ fraction and upper and lower CI values
 #' @name getVDJFraction
-#' @export getVDJFraction
 #'
 getVDJFraction <- function(tumour.logR, segs, GC.correct = FALSE){
   # Create model in ggplot - REPLACE with ASPCF

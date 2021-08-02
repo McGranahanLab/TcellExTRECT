@@ -15,6 +15,6 @@ exonwindowplot2 <- function(exon.loc, inputseq, extend1){
     chunkGC <- GC(chunk)
     chunkGCs[i] <- chunkGC
   }
-  plot(seq(n),chunkGCs,type="b",xlab="Exon",ylab="GC content")
+  #plot(seq(n),chunkGCs,type="b",xlab="Exon",ylab="GC content")
   return(data.frame(exon = seq(n), GC = chunkGCs))
 }

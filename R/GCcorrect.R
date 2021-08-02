@@ -11,7 +11,7 @@
 
 GCcorrect <- function(tumour.logR, exons , exonList, gene.fasta, hg19_or38 = 'hg19',sliding = 1000){
 
-  gene.fasta.start <- ifelse(hg19_or38 == 'hg19', 21999999, 2) # Get number for hg38)
+  gene.fasta.start <- ifelse(hg19_or38 == 'hg19', 21999999, 21531846) # Get number for hg38)
 
   TCRA.gc.df <- slidingwindowplot_alt(sliding, gene.fasta[[1]])
   TCRA.gc.df$pos <- TCRA.gc.df$loc + gene.fasta.start
