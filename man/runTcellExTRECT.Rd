@@ -34,11 +34,9 @@ runTcellExTRECT(
 \item{median.thresh}{threshold to remove exons with low coverage}
 
 \item{sample_name}{name of sample run}
-
-\item{exons.gc.content}{GC content of exons}
 }
 \value{
-data frame of TCRA T cell fractions with 95% CI
+data frame of TCRA T cell fractions with 95\% CI
 }
 \description{
 Function to run T cell ExTRECT

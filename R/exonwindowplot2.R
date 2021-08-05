@@ -5,7 +5,6 @@
 #' @param extend1 extend exon sequence by specific number of bases
 #' @return data frame of GC content for exons
 #' @name exonwindowplot2
-#' @export
 
 exonwindowplot2 <- function(exon.loc, inputseq, extend1){
   n <- length(exon.loc)

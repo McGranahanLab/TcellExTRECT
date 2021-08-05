@@ -5,9 +5,10 @@
 #' @param exonList GC content of exons
 #' @param gene.fasta FASTA file for VDJ gene e.g TCRA
 #' @param gene.fasta offset for FASTA file, e.g 21999999 for TCRA in hg19
+#' @param hg19_or38 What genome version to use, must be 'hg19' or 'hg38'
+#' @param sliding number of bp for gc windows
 #' @return data frame of GC correct logR values
 #' @name GCcorrect
-#' @export GCcorrect
 
 GCcorrect <- function(tumour.logR, exons , exonList, gene.fasta, hg19_or38 = 'hg19',sliding = 1000){
 

@@ -2,20 +2,30 @@
 % Please edit documentation in R/getVDJFraction.R
 \name{getVDJFraction}
 \alias{getVDJFraction}
-\title{Original method for calculating final VDJ fraction}
+\title{Method for calculating final VDJ fraction}
 \usage{
-getVDJFraction(tumour.logR, segs, GC.correct = FALSE)
+getVDJFraction(
+  tumour.logR,
+  segs,
+  norm.ci.95,
+  GC.correct = FALSE,
+  ci_type = "simultaneous"
+)
 }
 \arguments{
 \item{tumour.logR}{log ratio in region}
 
 \item{segs}{Location of segments used for normalisation and focal region}
 
+\item{norm.ci.95}{Adjusted value for 95\% CI}
+
 \item{GC.correct}{Whether to use GC corrected value or not}
+
+\item{ci_type}{Method to use for calculation of the confidence interval}
 }
 \value{
 VDJ fraction and upper and lower CI values
 }
 \description{
-Original method for calculating final VDJ fraction
+Method for calculating final VDJ fraction
 }

@@ -12,7 +12,9 @@ plotTcellExTRECT(
   exons.to.use = NULL,
   median.k = 50,
   median.thresh = 15,
-  sample_name = ""
+  sample_name = "",
+  txt.size = 4,
+  txt.height = 1.5
 )
 }
 \arguments{
@@ -32,7 +34,9 @@ plotTcellExTRECT(
 
 \item{sample_name}{name of sample run}
 
-\item{exons.gc.content}{GC content of exons}
+\item{txt.size}{size of annotation text}
+
+\item{txt.height}{location on y axis of annotation txt}
 }
 \value{
 data frame of TCRA T cell fractions with 95% CI

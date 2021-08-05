@@ -25,12 +25,12 @@ install_github("McGranahanLab/T-Cell-ExTRECT/")
 
 
 ```r
-install.packages('PATH/To/T-Cell=ExTRECT/', repos=NULL, type ='source')
+install.packages('PATH/To/T-Cell-ExTRECT/', repos=NULL, type ='source')
 ```
 
 ## Requirements
 
-Samtools (>v0)
+Samtools (>v1.3.1)
 
 ## Example use
 Running T cell ExTRECT on your data is both fast and easy!
@@ -73,7 +73,9 @@ TCRA.out
 
 The `cov_example` data frame is an inbuilt example of coverage reads from the *TCRA* locus. Different capture kits have different exon positions and not all capture kits cover the *TCRA* locus. The `TCRA_exons_hg19` data contains exon locations from the Agilent v4/5 exome capture kits for genomes aligned to hg38. The TcellExTRECT package also comes with data for hg38 Agilent v4/5 genomes (`TCRA_exons_hg38`) and an exon set for Nimblegen kits `TCRA_exons_nimblegen_hg19`, more will be added soon!
 
-We can also visualise the calculate log ratio from T Cell ExTRECT, this can be very useful to check that everything is working.
+We can also visualise the calculated log ratio from T Cell ExTRECT, this can be very useful to check that everything is working. The following produces the pre and post GC corrected versions of the log ratio within the *TCRA* loci, reads are coloured by the class of VDJ segment they are, e.g. *TCRA-V* segments are blue. Note that the *TCRA* loci also includes segments related to *TCR delta* (*TCRD* or *TRD*), e.g. *TCRD-V*. Vertical dotted lines represent the regions of the genome used for the normalised baseline (Norm region start and Norm region end) as well as the 'Focal region' that is used in the calculation of the *TCRA* fraction as the location we expect to see maximum signal.
+
+If there is a signal coming from T cells you expect to see a dip in the Log2 Read Depth Ratio around the focal region. A quick visual QC check is to see if there are any exons or reads that are outliers and potentially interfering with the calculation of the T cell fraction.
 
 ```r
 plotTcellExTRECT(cov_example, TCRA_exons_hg19,

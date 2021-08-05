@@ -40,6 +40,23 @@
 "TCRA_exons_hg19"
 
 
+#' TCRA exons (hg38)
+#'
+#' Exons used in Agilent v4/5 capture kit within TCRA loci, extracted
+#' from bed file (hg38 version)
+#'
+#' @format A data frame of exon locations
+#' @return NA
+"TCRA_exons_hg38"
+
+#' TCRA segments
+#'
+#' Data frame of the VDJ gene segments within the TCRA locu
+#'
+#' @format A data frame of TCRA segments
+#' @return NA
+"TCRA_segments"
+
 #' TCRA exons nimblegen (hg19)
 #'
 #' Exons used in Nimblegen capture kit within TCRA loci, extracted

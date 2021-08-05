@@ -2,7 +2,6 @@
 #'
 #' @param vdj.region.df data frame containing coverage values by position
 #' @param exons.selected list of exon positions based on exome capture kit used
-#' @param exons.gc.content GC content of exons
 #' @param vdj.seg locations of segments used for calculation of TCRA score
 #' @param hg19_or_38 hg19 or hg38 version of genome
 #' @param exons.to.use option to manually select which exons to use (defaults to all)
@@ -10,7 +9,7 @@
 #' @param median.k rolling median window
 #' @param median.thresh threshold to remove exons with low coverage
 #' @param sample_name name of sample run
-#' @return data frame of TCRA T cell fractions with 95% CI
+#' @return data frame of TCRA T cell fractions with 95\% CI
 #' @name runTcellExTRECT
 #' @export
 
@@ -74,14 +73,14 @@ runTcellExTRECT <- function(vdj.region.df, exons.selected,
     vdj.logR.df <-baselineAdj.out[[1]]
     ci.95.value <- baselineAdj.out[[2]]
 
-    vdj.fraction.output  <- getVDJFraction_upd2(vdj.logR.df, vdj.seg,ci.95.value, TRUE)
+    vdj.fraction.output  <- getVDJFraction(vdj.logR.df, vdj.seg,ci.95.value, TRUE)
 
   }else{
     baselineAdj.out <- baselineAdj(vdj.logR.df, vdj.seg, GCcorrect = FALSE)
     vdj.logR.df <-baselineAdj.out[[1]]
     ci.95.value <- baselineAdj.out[[2]]
 
-    vdj.fraction.output  <- getVDJFraction_upd2(vdj.logR.df, vdj.seg,ci.95.value, FALSE)
+    vdj.fraction.output  <- getVDJFraction(vdj.logR.df, vdj.seg,ci.95.value, FALSE)
   }
 
   out.df <- data.frame(sample = sample_name,

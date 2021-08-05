@@ -2,7 +2,6 @@
 #'
 #' @param vdj.region.df data frame containing coverage values by position
 #' @param exons.selected list of exon positions based on exome capture kit used
-#' @param exons.gc.content GC content of exons
 #' @param vdj.seg locations of segments used for calculation of TCRA score
 #' @param hg19_or_38 hg19 or hg38 version of genome
 #' @param exons.to.use option to manually select which exons to use (defaults to all)
@@ -12,6 +11,7 @@
 #' @param txt.size size of annotation text
 #' @param txt.height location on y axis of annotation txt
 #' @return data frame of TCRA T cell fractions with 95% CI
+#' @importFrom ggplot2 ggplot aes geom_point geom_smooth geom_vline annotate theme_bw xlab ylab scale_colour_manual ggtitle
 #' @name plotTcellExTRECT
 #' @export
 
@@ -99,57 +99,57 @@ plotTcellExTRECT <- function(vdj.region.df, exons.selected,
 
   p1 <- vdj.logR.df %>%
     dplyr::left_join(vdj.name.convert, 'TRA_segment_short') %>%
-    ggplot2::ggplot(ggplot2::aes(pos, Ratio)) +
-    ggplot2::geom_point(ggplot2::aes(col = TRA_segment_goodname)) + ggplot2::geom_smooth() +
-    ggplot2::theme_bw() +
-    ggplot2::scale_colour_manual(name = 'VDJ segment', values =custom.cols  ) +
-    ggplot2::ggtitle(paste0(sample_name,': TCRA loci (pre GC correction)'))+
-    ggplot2::ylab('Log2 Read Depth Ratio') + ggplot2::xlab('Chr14 position') +
-    ggplot2::geom_vline(ggplot2::aes(xintercept =vdj.seg[which(vdj.seg$segName == 'focal'), 'start']),
+    ggplot(aes(pos, Ratio)) +
+    geom_point(aes(col = TRA_segment_goodname)) + geom_smooth() +
+    theme_bw() +
+    scale_colour_manual(name = 'VDJ segment', values =custom.cols  ) +
+    ggtitle(paste0(sample_name,': TCRA loci (pre GC correction)'))+
+    ylab('Log2 Read Depth Ratio') + xlab('Chr14 position') +
+    geom_vline(aes(xintercept =vdj.seg[which(vdj.seg$segName == 'focal'), 'start']),
              col = 'red', linetype = 'dashed') +
-    ggplot2::geom_vline(ggplot2::aes(xintercept =vdj.seg[which(vdj.seg$segName == 'focal'), 'end']),
+    geom_vline(aes(xintercept =vdj.seg[which(vdj.seg$segName == 'focal'), 'end']),
                col = 'red', linetype = 'dashed') +
-    ggplot2::geom_vline(ggplot2::aes(xintercept =vdj.seg[which(vdj.seg$segName == 'local1'), 'start']),
+    geom_vline(aes(xintercept =vdj.seg[which(vdj.seg$segName == 'local1'), 'start']),
                         col = 'black', linetype = 'dashed') +
-    ggplot2::geom_vline(ggplot2::aes(xintercept =vdj.seg[which(vdj.seg$segName == 'local1'), 'end']),
+    geom_vline(aes(xintercept =vdj.seg[which(vdj.seg$segName == 'local1'), 'end']),
                         col = 'black', linetype = 'dashed') +
-    ggplot2::geom_vline(ggplot2::aes(xintercept =vdj.seg[which(vdj.seg$segName == 'local2'), 'start']),
+    geom_vline(aes(xintercept =vdj.seg[which(vdj.seg$segName == 'local2'), 'start']),
                       col = 'black', linetype = 'dashed') +
-    ggplot2::geom_vline(ggplot2::aes(xintercept =vdj.seg[which(vdj.seg$segName == 'local2'), 'end']),
+    geom_vline(aes(xintercept =vdj.seg[which(vdj.seg$segName == 'local2'), 'end']),
                         col = 'black', linetype = 'dashed') +
-    ggplot2::annotate("text", x = mean(unlist(vdj.seg[which(vdj.seg$segName == 'local1'), c('start','end')])),
+    annotate("text", x = mean(unlist(vdj.seg[which(vdj.seg$segName == 'local1'), c('start','end')])),
                       y =  txt.height, label = "Norm region \n start", size = txt.size) +
-    ggplot2::annotate("text", x = mean(unlist(vdj.seg[which(vdj.seg$segName == 'focal'), c('start','end')])),
+    annotate("text", x = mean(unlist(vdj.seg[which(vdj.seg$segName == 'focal'), c('start','end')])),
                       y =  txt.height, label = "Focal region", size = txt.size) +
-    ggplot2::annotate("text", x = mean(unlist(vdj.seg[which(vdj.seg$segName == 'local2'), c('start','end')])),
+    annotate("text", x = mean(unlist(vdj.seg[which(vdj.seg$segName == 'local2'), c('start','end')])),
                       y =  txt.height, label = "Norm region \n end", size = txt.size)
 
 
   p2 <- vdj.logR.df %>%
     dplyr::left_join(vdj.name.convert, 'TRA_segment_short') %>%
-    ggplot2::ggplot(ggplot2::aes(pos, Ratio.gc.correct)) +
-    ggplot2::geom_point(ggplot2::aes(col = TRA_segment_goodname)) + ggplot2::geom_smooth() +
-    ggplot2::scale_colour_manual(name = 'VDJ segment', values = custom.cols  ) +
-    ggplot2::ggtitle(paste0(sample_name,': TCRA loci (post GC correction)'))+
-    ggplot2::ylab('Log2 Read Depth Ratio (GC corrected)') + ggplot2::xlab('Chr14 position') +
-    ggplot2::geom_vline(ggplot2::aes(xintercept =vdj.seg[which(vdj.seg$segName == 'focal'), 'start']),
+    ggplot(aes(pos, Ratio.gc.correct)) +
+    geom_point(aes(col = TRA_segment_goodname)) + geom_smooth() +
+    scale_colour_manual(name = 'VDJ segment', values = custom.cols  ) +
+    ggtitle(paste0(sample_name,': TCRA loci (post GC correction)'))+
+    ylab('Log2 Read Depth Ratio (GC corrected)') + xlab('Chr14 position') +
+    geom_vline(aes(xintercept =vdj.seg[which(vdj.seg$segName == 'focal'), 'start']),
                col = 'red', linetype = 'dashed') +
-    ggplot2::geom_vline(ggplot2::aes(xintercept =vdj.seg[which(vdj.seg$segName == 'focal'), 'end']),
+    geom_vline(aes(xintercept =vdj.seg[which(vdj.seg$segName == 'focal'), 'end']),
                col = 'red', linetype = 'dashed') +
-    ggplot2::theme_bw() +
-    ggplot2::geom_vline(ggplot2::aes(xintercept =vdj.seg[which(vdj.seg$segName == 'local1'), 'start']),
+    theme_bw() +
+    geom_vline(aes(xintercept =vdj.seg[which(vdj.seg$segName == 'local1'), 'start']),
                         col = 'black', linetype = 'dashed') +
-    ggplot2::geom_vline(ggplot2::aes(xintercept =vdj.seg[which(vdj.seg$segName == 'local1'), 'end']),
+    geom_vline(aes(xintercept =vdj.seg[which(vdj.seg$segName == 'local1'), 'end']),
                         col = 'black', linetype = 'dashed') +
-    ggplot2::geom_vline(ggplot2::aes(xintercept =vdj.seg[which(vdj.seg$segName == 'local2'), 'start']),
+    geom_vline(aes(xintercept =vdj.seg[which(vdj.seg$segName == 'local2'), 'start']),
                         col = 'black', linetype = 'dashed') +
-    ggplot2::geom_vline(ggplot2::aes(xintercept =vdj.seg[which(vdj.seg$segName == 'local2'), 'end']),
+    geom_vline(aes(xintercept =vdj.seg[which(vdj.seg$segName == 'local2'), 'end']),
                         col = 'black', linetype = 'dashed') +
-    ggplot2::annotate("text", x = mean(unlist(vdj.seg[which(vdj.seg$segName == 'local1'), c('start','end')])),
+    annotate("text", x = mean(unlist(vdj.seg[which(vdj.seg$segName == 'local1'), c('start','end')])),
              y =  txt.height, label = "Norm region \n start", size = txt.size) +
-    ggplot2::annotate("text", x = mean(unlist(vdj.seg[which(vdj.seg$segName == 'focal'), c('start','end')])),
+    annotate("text", x = mean(unlist(vdj.seg[which(vdj.seg$segName == 'focal'), c('start','end')])),
              y =  txt.height, label = "Focal region", size = txt.size) +
-    ggplot2::annotate("text", x = mean(unlist(vdj.seg[which(vdj.seg$segName == 'local2'), c('start','end')])),
+    annotate("text", x = mean(unlist(vdj.seg[which(vdj.seg$segName == 'local2'), c('start','end')])),
              y =  txt.height, label = "Norm region \n end", size = txt.size)
 
 

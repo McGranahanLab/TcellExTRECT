@@ -21,6 +21,10 @@ GCcorrect(
 \item{exonList}{GC content of exons}
 
 \item{gene.fasta}{offset for FASTA file, e.g 21999999 for TCRA in hg19}
+
+\item{hg19_or38}{What genome version to use, must be 'hg19' or 'hg38'}
+
+\item{sliding}{number of bp for gc windows}
 }
 \value{
 data frame of GC correct logR values

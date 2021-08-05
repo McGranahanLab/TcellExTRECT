@@ -4,7 +4,6 @@
 #' @param inputseq Sequence to calculate GC content for
 #' @return data frame of GC content
 #' @name slidingwindowplot_alt
-#' @export
 
 slidingwindowplot_alt <- function(windowsize, inputseq){
   starts <- seq(1, length(inputseq)-windowsize, by = windowsize)

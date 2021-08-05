@@ -2,7 +2,6 @@
 #'
 #' @param covFile Path to coverage file from getCovFromBam output
 #' @name loadCov
-#' @export
 
 loadCov <- function(covFile){
   cov_df <- readr::read_tsv(cov.file, col_names = FALSE)

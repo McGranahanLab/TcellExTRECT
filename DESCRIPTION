@@ -4,13 +4,14 @@ Title: T cell Exome TREC Tool
 Version: 1.0.0
 Author: Robert Bentham
 Maintainer: Robert Bentham <robert.bentham.11@ucl.ac.uk>
-Description: Compute fraction of T cells in exome data
+Description: T Cell Exome TREC Tool (T Cell ExTRECT) is an R package to calculate T cell fractions from WES data from hg19 or hg38 aligned genomes.
 VignetteBuilder: knitr
 Depends:
-    R (>= 3.3),
-    gratia
+    R (>= 3.5.0),
 Imports:
-    tidyverse,
+    dplyr,
+    gratia,
+    readr,
     seqinr,
     rlang,
     stats,

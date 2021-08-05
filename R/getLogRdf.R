@@ -5,7 +5,6 @@
 #' @param minCov Minimum GC coverage required
 #' @return Calculated single log ratio based on segments
 #' @name getLogRdf
-#' @export getLogRdf
 
 getLogRdf <-  function(region.df, segs, minCov = 0){
   col_input <- 'reads'
