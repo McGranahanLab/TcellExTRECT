@@ -17,6 +17,10 @@ plotTcellExTRECT <- function(vdj.region.df, exons.selected,
                              vdj.seg, hg19_or_38, exons.to.use = NULL,
                              median.k = 50, median.thresh = 15,
                              sample_name = ''){
+
+  # Make sure colnames are correct
+  colnames(exons.selected) <- c('X1','X2','X3')
+
   data("TCRA_fasta")
   # By default use all exons
   if(is.null(exons.to.use)){

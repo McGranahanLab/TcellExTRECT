@@ -1,48 +1,57 @@
----
-title: "Introduction to T Cell ExTRECT"
-author: 
-   name: "Robert Bentham"
-   affiliation: "Cancer Institute, University College London"
-   email: "robert.bentham.11@ucl.ac.uk"
-date: "2021-08-02"
-output: 
-  html_document:
-    toc_float: true
-vignette: >
-  %\VignetteIndexEntry{Introduction to T Cell ExTRECT}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
-abstract: T Cell Exome TREC Tool (T Cell ExTRECT) is an R package to calculate T cell fractions from WES data from hg19 or hg38 aligned genomes.
-package: |
-  TCellExTRECT 1.0.0
-  Report issues to TCellExTRECT@gmail.com
----
+# T Cell ExTRECT version 1.0.0
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+T Cell Exome TREC Tool (T Cell ExTRECT) is an R package to calculate T cell fractions from WES data from hg19 or hg38 aligned genomes.
+
+## License
+
+T Cell ExTRECT is free for academic use.
+
+INSERT LICENSE
+
+## Instalation guide
+
+T cell ExTRECT can either be installed from github using the `install_github()` function in the package devtools or directly from source.
+
+### Method 1 - Using devtools
+
+```r
+# install.packages('devtools')
+library(devtools)
+install_github("McGranahanLab/T-Cell-ExTRECT/")
+
 ```
 
-# T cell ExTRECT
+### Method 2 - Downloaded from source
 
+
+```r
+install.packages('PATH/To/T-Cell=ExTRECT/', repos=NULL, type ='source')
+```
+
+## Requirements
+
+Samtools (>v0)
+
+## Example use
 Running T cell ExTRECT on your data is both fast and easy!
 
-```{r, results = "hide",warning = FALSE,message=FALSE}
+```r
 library(TcellExTRECT)
 ```
 
 First take an aligned bam file (hg38 or hg19) of your choice
 
-```{r}
+```r
 example_bam <- '/path/to/file.bam'
 ```
 
 Then use the pre-defined *TCRA* gene segments in the `tcra_seg_hg19` or `tcra_seg_hg38` data file to extract the coverage values. 
 
-```{r}
+```r
 data("tcra_seg_hg19")
 ```
 
-```{r,eval = FALSE}
+```r
 cov.file <- getCovFromBam(bamPath = example_bam,
                           outPath = '',
                           vdj.seg = tcra_seg_hg19)
@@ -54,7 +63,7 @@ The `cov.df` object should be a data frame with two columns names `pos` (positio
 
 Once the coverage values have been loaded you can run TCellExTRECT with the following function:
 
-```{r}
+```r
 data(TCRA_exons_hg19)
 data(cov_example)
 
@@ -66,7 +75,7 @@ The `cov_example` data frame is an inbuilt example of coverage reads from the *T
 
 We can also visualise the calculate log ratio from T Cell ExTRECT, this can be very useful to check that everything is working.
 
-```{r}
+```r
 plotTcellExTRECT(cov_example, TCRA_exons_hg19,
                 tcra_seg_hg19,'hg19', sample_name = 'TEST')
 ```
@@ -75,17 +84,9 @@ This will plot both the pre and post GC corrected versions.
 
 Finally the TCRA T cell fractions can be adjusted for tumour copy number and purity with the following function:
 
-```{r}
+```r
 TCRA.out <- adjustTcellExTRECT(TCRA.out, purity = 0.5, TCRA.cn = 3)
 TCRA.out
-```
-
-
-
-# Session Info {-}
-
-```{r session_info, include=TRUE, echo=TRUE, results='markup'}
-devtools::session_info()
 ```
 
 

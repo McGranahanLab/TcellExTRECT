@@ -1,20 +1,20 @@
 Package: TcellExTRECT
 Type: Package
 Title: T cell Exome TREC Tool
-Version: 0.1.0
+Version: 1.0.0
 Author: Robert Bentham
 Maintainer: Robert Bentham <robert.bentham.11@ucl.ac.uk>
 Description: Compute fraction of T cells in exome data
 VignetteBuilder: knitr
 Depends:
-    R (>= 3.3) 
+    R (>= 3.3),
+    gratia
 Imports:
     tidyverse,
     seqinr,
     rlang,
     stats,
     mgcv,
-    gratia,
     ggplot2,
     magrittr
 Suggests:
