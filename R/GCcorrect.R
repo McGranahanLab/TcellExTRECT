@@ -7,10 +7,14 @@
 #' @param gene.fasta offset for FASTA file, e.g 21999999 for TCRA in hg19
 #' @param hg19_or38 What genome version to use, must be 'hg19' or 'hg38'
 #' @param sliding number of bp for gc windows
+#' @importFrom stats lm
 #' @return data frame of GC correct logR values
 #' @name GCcorrect
 
 GCcorrect <- function(tumour.logR, exons , exonList, gene.fasta, hg19_or38 = 'hg19',sliding = 1000){
+
+  # Solve visible binding issue:
+  pos <- GC <- exon.gc <- smooth.gc <- NULL
 
   gene.fasta.start <- ifelse(hg19_or38 == 'hg19', 21999999, 21531846) # Get number for hg38)
 
@@ -41,7 +45,7 @@ GCcorrect <- function(tumour.logR, exons , exonList, gene.fasta, hg19_or38 = 'hg
 
 }
 
-exonPosFun <- function(x, exons = TCRA.exons){
+exonPosFun <- function(x, exons){
   rev(which(exons$X2 <= x))[1]
 }
 exonPosFun_v <- Vectorize(exonPosFun, vectorize.args = 'x')

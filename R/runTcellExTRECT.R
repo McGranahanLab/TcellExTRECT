@@ -22,7 +22,6 @@ runTcellExTRECT <- function(vdj.region.df, exons.selected,
   # Make sure colnames are correct
   colnames(exons.selected) <- c('X1','X2','X3')
 
-  data("TCRA_fasta")
   # By default use all exons
   if(is.null(exons.to.use)){
     exons.to.use <-  seq_len(dim(exons.selected)[1])

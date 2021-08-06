@@ -4,9 +4,13 @@
 #' @param segs Location of segments used for normalisation and focal region
 #' @param minCov Minimum GC coverage required
 #' @return Calculated single log ratio based on segments
+#' @importFrom stats median
 #' @name getLogRdf
 
 getLogRdf <-  function(region.df, segs, minCov = 0){
+
+  pos <- reads <- NULL
+
   col_input <- 'reads'
   col.sym <- rlang::sym(col_input)
   # For random locations with no VDJ effect use beginning and end of TCRA

@@ -10,6 +10,10 @@
 #' @export
 
 adjustTcellExTRECT <- function(TCRA.out, purity, TCRA.cn, trustPurity = TRUE){
+  # solve visible binding issue
+  TCRA.tcell.fraction <- TCRA.tcell.fraction.lwr <- TCRA.tcell.fraction.upr <- NULL
+  rawRatio <- rawRatio.lwr <- rawRatio.upr <- maxPossible <- highTcellFlag <- NULL
+  TCRA.tcell.fraction.adj <- TCRA.tcell.fraction.adj.lwr <-TCRA.tcell.fraction.adj.upr <- NULL
 
   # check purity is correct
   if(purity > 1 | purity < 0) stop('purity needs to be between 0 and 1')

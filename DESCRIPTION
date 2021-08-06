@@ -8,9 +8,9 @@ Description: T Cell Exome TREC Tool (T Cell ExTRECT) is an R package to calculat
 VignetteBuilder: knitr
 Depends:
     R (>= 3.5.0),
+    gratia
 Imports:
     dplyr,
-    gratia,
     readr,
     seqinr,
     rlang,
@@ -22,7 +22,7 @@ Suggests:
     devtools, 
     knitr,
     rmarkdown
-License: What license is it under?
+License: file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1

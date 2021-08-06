@@ -6,9 +6,13 @@
 #' @param median.thresh threshold to remove exons with low coverage
 #' @param exons.to.use option to manually select exons
 #' @return Data frame of positions and rolling median of coverage values within chosen exons
+#' @importFrom stats median
 #' @name medianExonCoverage
 
 medianExonCoverage <- function(vdj.region.df, exons.selected, median.k = 50, median.thresh = 15, exons.to.use){
+
+  pos <- NULL
+
   # Filter for positions within exons as expected and apply median filter and remove any exons required
   vdj.region.df.filt.exons.median <- lapply(seq_len(dim(exons.selected)[1]), function(x){
     tmp <- vdj.region.df %>%
@@ -24,8 +28,7 @@ medianExonCoverage <- function(vdj.region.df, exons.selected, median.k = 50, med
   if(length(exon.remove) > 0){
     vdj.region.df.filt.exons.median <- vdj.region.df.filt.exons.median[-exon.remove]
   }
-  vdj.region.df.filt.exons.median <- vdj.region.df.filt.exons.median %>%
-    Reduce(rbind, .)
+  vdj.region.df.filt.exons.median <- Reduce(rbind, vdj.region.df.filt.exons.median)
 
   # Get rid of any repeated rows that might exist - in theory I don't think they will
   vdj.region.df.filt.exons.median <- dplyr::distinct(vdj.region.df.filt.exons.median)

@@ -20,10 +20,11 @@ plotTcellExTRECT <- function(vdj.region.df, exons.selected,
                              median.k = 50, median.thresh = 15,
                              sample_name = '',txt.size = 4, txt.height = 1.5){
 
+  pos <- Ratio <-  TRA_segment_goodname <- Ratio.gc.correct <- NULL
+
   # Make sure colnames are correct
   colnames(exons.selected) <- c('X1','X2','X3')
 
-  data("TCRA_fasta")
   # By default use all exons
   if(is.null(exons.to.use)){
     exons.to.use <-  seq_len(dim(exons.selected)[1])
@@ -63,7 +64,6 @@ plotTcellExTRECT <- function(vdj.region.df, exons.selected,
   if(dim(vdj.logR.df)[1] == 0 | length(exon.remove) > 30){
     return(NULL)}
 
-  data("TCRA_fasta")
   vdj.logR.df <- GCcorrect(vdj.logR.df,
                            exons = exons.selected,
                            exonList = exons.gc.content,
@@ -78,7 +78,6 @@ plotTcellExTRECT <- function(vdj.region.df, exons.selected,
   ci.95.value <- baselineAdj.out[[2]]
 
   # Also add in segment info
-  data(TCRA_segments)
   vdj.logR.df  <-vdj.logR.df  %>%
     dplyr::mutate(TRA_segment = TRA_segment_find_v(pos, hg19_or_38))
 

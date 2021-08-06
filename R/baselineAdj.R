@@ -3,11 +3,15 @@
 #' @param vdj_logR_input data frame of positions and coverage values
 #' @param vdj_seg Segments used for normalisation
 #' @param GCcorrect Use GC corrected output or not
+#' @importFrom stats sd confint
+#' @import gratia
 #' @return Adjusted baseline logR dataframe
 #' @name baselineAdj
 
 
 baselineAdj <- function(vdj_logR_input, vdj_seg, GCcorrect = TRUE){
+
+  pos <- reads <- NULL
 
   ratio.col <- ifelse(GCcorrect, 'Ratio.gc.correct','Ratio')
   ratio.col <- rlang::sym(ratio.col)
@@ -27,7 +31,7 @@ baselineAdj <- function(vdj_logR_input, vdj_seg, GCcorrect = TRUE){
   }
 
 
-  adjust.fit.model <- gratia:::confint.gam(adjust.model, parm = "s(pos)",
+  adjust.fit.model <- confint(adjust.model, parm = "s(pos)",
                                            partial_match = TRUE, type = 'simultaneous',
                                            newdata = seq(vdj_seg[2,2], vdj_seg[2,3],by=100),
                                            shift = TRUE)
