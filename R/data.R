@@ -49,6 +49,26 @@
 #' @return NA
 "TCRA_exons_hg38"
 
+
+#' TCRA exons (hg19)
+#'
+#' Exons for Agilent v2 capture kit within TCRA loci, based
+#' on Agilent v4/5 but with exons showing bias removed (hg19)
+#'
+#' @format A data frame of exon locations
+#' @return NA
+"TCRA_exons_agilent_v2_hg19"
+
+
+#' TCRA exons (hg38)
+#'
+#' Exons for Agilent v2 capture kit within TCRA loci, based
+#' on Agilent v4/5 but with exons showing bias removed (hg38)
+#'
+#' @format A data frame of exon locations
+#' @return NA
+"TCRA_exons_agilent_v2_hg38"
+
 #' TCRA segments
 #'
 #' Data frame of the VDJ gene segments within the TCRA locu
@@ -57,14 +77,23 @@
 #' @return NA
 "TCRA_segments"
 
-#' TCRA exons nimblegen (hg19)
+#' TCRA exons from Nimblegen SeqCap_EZ_Exome_v3_hg19_capture_targets.bed (hg19)
 #'
-#' Exons used in Nimblegen capture kit within TCRA loci, extracted
+#' Exons used in Nimblegen SeqCap EZ Exome v3 capture kit within TCRA loci, extracted
 #' from bed file (hg19 version)
 #'
 #' @format A data frame of exon locations
 #' @return NA
 "TCRA_exons_nimblegen_hg19"
+
+#' TCRA exons from Nimblegen SeqCap_EZ_Exome_v3_hg19_capture_targets.bed (hg19)
+#'
+#' Exons used in Nimblegen SeqCap EZ Exome v3 capture kit within TCRA loci, extracted
+#' from bed file (hg19 version)
+#'
+#' @format A data frame of exon locations
+#' @return NA
+"TCRA_exons_nimblegen_hg38"
 
 #' Example coverage file
 #'
