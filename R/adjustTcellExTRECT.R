@@ -1,7 +1,7 @@
 #' Adjust TCRA T cell fraction based on tumour purity and copy number
 #'
 #' @param TCRA.out Output of runTcellExTRECT
-#' @param purity Tumour purity
+#' @param purity Tumour purity, between 0 and 1
 #' @param TCRA.cn Tumour copynumber at TCRA locus
 #' @param trustPurity If lower CI of TCRA score > 1 - purity assume tumour copy number is wrong and instead assume 2
 #'
@@ -10,6 +10,10 @@
 #' @export
 
 adjustTcellExTRECT <- function(TCRA.out, purity, TCRA.cn, trustPurity = TRUE){
+
+  # check purity is correct
+  if(purity > 1 | purity < 0) stop('purity needs to be between 0 and 1')
+
   TCRA.out$purity <- purity
   TCRA.out$TCRA.cn <- TCRA.cn
 

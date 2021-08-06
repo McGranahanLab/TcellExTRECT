@@ -9,7 +9,7 @@ adjustTcellExTRECT(TCRA.out, purity, TCRA.cn, trustPurity = TRUE)
 \arguments{
 \item{TCRA.out}{Output of runTcellExTRECT}
 
-\item{purity}{Tumour purity}
+\item{purity}{Tumour purity, between 0 and 1}
 
 \item{TCRA.cn}{Tumour copynumber at TCRA locus}
 
