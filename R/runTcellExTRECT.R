@@ -9,7 +9,7 @@
 #' @param median.k rolling median window
 #' @param median.thresh threshold to remove exons with low coverage
 #' @param sample_name name of sample run
-#' @return data frame of TCRA T cell fractions with 95\% CI
+#' @return data frame of TCRA T cell fractions with 95\% CI and QC fit value for quality of the solution
 #' @name runTcellExTRECT
 #' @export
 
@@ -74,17 +74,26 @@ runTcellExTRECT <- function(vdj.region.df, exons.selected,
 
     vdj.fraction.output  <- getVDJFraction(vdj.logR.df, vdj.seg,ci.95.value, TRUE)
 
+    qc.value <- calcQCvalue(vdj.logR.df, vdj.seg, GC_correct = TRUE)
+    if(qc.value[2] > 4){
+      warning('Fitted GAM model is very noisy and results may be less accurate. Run plotTcellExTRECT() to visually see fit.')
+    }
   }else{
     baselineAdj.out <- baselineAdj(vdj.logR.df, vdj.seg, GCcorrect = FALSE)
     vdj.logR.df <-baselineAdj.out[[1]]
     ci.95.value <- baselineAdj.out[[2]]
 
     vdj.fraction.output  <- getVDJFraction(vdj.logR.df, vdj.seg,ci.95.value, FALSE)
+    qc.value <- calcQCvalue(vdj.logR.df, vdj.seg, GC_correct = FALSE)
+    if(qc.value[2] > 4){
+      warning('Fitted GAM model is very noisy and results may be less accurate. Run plotTcellExTRECT() to visually see fit.')
+    }
   }
 
   out.df <- data.frame(sample = sample_name,
                        TCRA.tcell.fraction = vdj.fraction.output[1],
                        TCRA.tcell.fraction.lwr = vdj.fraction.output[2],
-                       TCRA.tcell.fraction.upr = vdj.fraction.output[3])
+                       TCRA.tcell.fraction.upr = vdj.fraction.output[3],
+                       qcFit = qc.value[2])
   return(out.df)
 }

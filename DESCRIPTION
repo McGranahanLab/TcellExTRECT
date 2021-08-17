@@ -12,6 +12,7 @@ Depends:
 Imports:
     dplyr,
     readr,
+    zoo,
     seqinr,
     rlang,
     stats,

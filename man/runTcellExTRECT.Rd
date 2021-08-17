@@ -36,7 +36,7 @@ runTcellExTRECT(
 \item{sample_name}{name of sample run}
 }
 \value{
-data frame of TCRA T cell fractions with 95\% CI
+data frame of TCRA T cell fractions with 95\% CI and QC fit value for quality of the solution
 }
 \description{
 Function to run T cell ExTRECT
