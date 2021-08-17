@@ -4,7 +4,6 @@
 #' @param segs GC content of exons
 #' @param ci_type FASTA file for VDJ gene e.g TCRA
 #' @param GC_correct whether to use GC correction or not for output
-#' @importFrom zoo rollapply as.zoo
 #' @return QC values for judging fit of GAM model
 #' @name calcQCvalue
 #' @export
