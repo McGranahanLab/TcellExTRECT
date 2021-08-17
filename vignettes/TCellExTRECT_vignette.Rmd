@@ -65,6 +65,7 @@ TCRA.out
 The `cov_example` data frame is an inbuilt example of coverage reads from the *TCRA* locus. Different capture kits have different exon positions and not all capture kits cover the *TCRA* locus. The `TCRA_exons_hg19` data contains exon locations from the Agilent v4/5 exome capture kits for genomes aligned to hg10. The TcellExTRECT package also comes with data for hg38 Agilent v4/5 genomes (`TCRA_exons_hg38`) and an exon set for Nimblegen kits `TCRA_exons_nimblegen_hg19`, more will be added soon or can be requested!
 
 The output of `runTcellExTRECT` is a data frame containing 5 columns:
+
 * `sample` - the name of the sample run
 * `TCRA.tcell.fraction` - The estimated fraction of the sample that are T cells
 * `TCRA.tcell.fraction.lwr` and `TCRA.tcell.fraction.upr` - The 95\% confindence interval values of the estimated T cell fraction
@@ -81,13 +82,22 @@ plotTcellExTRECT(cov_example, TCRA_exons_hg19,
 
 This will plot both the pre and post GC corrected versions. 
 
-Finally the TCRA T cell fractions can be adjusted for tumour copy number and purity with the following function:
+As a final step for cancer samples with known purities and copy number states around the TCRA loci, the TCRA T cell fractions can be adjusted with the following function:
 
 ```{r}
 TCRA.out <- adjustTcellExTRECT(TCRA.out, purity = 0.5, TCRA.cn = 3)
 TCRA.out
 ```
 
+Finally, if the raw data used to produce the scores or the plots is required it can be extracted with the following function:
+
+```{r}
+TCRA.df <- exonsTcellExTRECT(cov_example, TCRA_exons_hg19, tcra_seg_hg19, 'hg19',GC_correct = TRUE,
+                             summariseExons = FALSE)
+
+```
+
+The option `summariseExons = TRUE` will return a smaller data frame summarised using the median value over the input exons. This function is intended to be used for additional QC checks on the exons used but could also be used for manual plotting.
 
 
 # Session Info {-}
