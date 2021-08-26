@@ -33,9 +33,9 @@ adjustTcellExTRECT <- function(TCRA.out, purity, TCRA.cn, trustPurity = TRUE){
 
   if(trustPurity){
     TCRA.out <- TCRA.out %>%
-      dplyr::mutate(TCRA.tcell.fraction.adj = ifelse(highTcellFlag, maxPossible, TCRA.tcell.fraction)) %>%
-      dplyr::mutate(TCRA.tcell.fraction.adj.lwr = ifelse(highTcellFlag, maxPossible, TCRA.tcell.fraction.lwr)) %>%
-      dplyr::mutate(TCRA.tcell.fraction.adj.upr = ifelse(highTcellFlag, maxPossible, TCRA.tcell.fraction.upr))
+      dplyr::mutate(TCRA.tcell.fraction.adj = ifelse(highTcellFlag, TCRA.tcell.fraction,TCRA.tcell.fraction.adj)) %>%
+      dplyr::mutate(TCRA.tcell.fraction.adj.lwr = ifelse(highTcellFlag, TCRA.tcell.fraction.lwr,TCRA.tcell.fraction.lwr.adj)) %>%
+      dplyr::mutate(TCRA.tcell.fraction.adj.upr = ifelse(highTcellFlag, TCRA.tcell.fraction.upr, TCRA.tcell.fraction.lwr.adj))
   }
   TCRA.out <- TCRA.out %>%
     dplyr::select(sample, purity, TCRA.cn,
