@@ -29,13 +29,13 @@ adjustTcellExTRECT <- function(TCRA.out, purity, TCRA.cn, trustPurity = TRUE){
     dplyr::mutate(TCRA.tcell.fraction.adj.lwr= 1 - ((1-purity+(purity*TCRA.cn)/2)*rawRatio.lwr) - purity + ((purity*TCRA.cn)/2)) %>%
     dplyr::mutate(TCRA.tcell.fraction.adj.upr= 1 - ((1-purity+(purity*TCRA.cn)/2)*rawRatio.upr) - purity + ((purity*TCRA.cn)/2)) %>%
     dplyr::mutate(maxPossible = 1- purity) %>%
-    dplyr::mutate(highTcellFlag = TCRA.tcell.fraction.lwr > maxPossible)
+    dplyr::mutate(highTcellFlag = TCRA.tcell.fraction.adj.lwr > maxPossible)
 
   if(trustPurity){
     TCRA.out <- TCRA.out %>%
       dplyr::mutate(TCRA.tcell.fraction.adj = ifelse(highTcellFlag, TCRA.tcell.fraction,TCRA.tcell.fraction.adj)) %>%
-      dplyr::mutate(TCRA.tcell.fraction.adj.lwr = ifelse(highTcellFlag, TCRA.tcell.fraction.lwr,TCRA.tcell.fraction.lwr.adj)) %>%
-      dplyr::mutate(TCRA.tcell.fraction.adj.upr = ifelse(highTcellFlag, TCRA.tcell.fraction.upr, TCRA.tcell.fraction.lwr.adj))
+      dplyr::mutate(TCRA.tcell.fraction.adj.lwr = ifelse(highTcellFlag, TCRA.tcell.fraction.lwr,TCRA.tcell.fraction.adj.lwr)) %>%
+      dplyr::mutate(TCRA.tcell.fraction.adj.upr = ifelse(highTcellFlag, TCRA.tcell.fraction.upr, TCRA.tcell.fraction.adj.upr))
   }
   TCRA.out <- TCRA.out %>%
     dplyr::select(sample, purity, TCRA.cn,
