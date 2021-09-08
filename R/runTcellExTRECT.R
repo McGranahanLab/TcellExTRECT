@@ -86,7 +86,7 @@ runTcellExTRECT <- function(vdj.region.df, exons.selected,
     vdj.fraction.output  <- getVDJFraction(vdj.logR.df, vdj.seg,ci.95.value, FALSE)
     qc.value <- calcQCvalue(vdj.logR.df, vdj.seg, GC_correct = FALSE)
     if(qc.value[2] > 4){
-      warning('Fitted GAM model is very noisy and results may be less accurate. Run plotTcellExTRECT() to visually see fit.')
+      warning('Fitted GAM model is very noisy and results may be less accurate. Run plotTcellExTRECT() to see fit.')
     }
   }
 

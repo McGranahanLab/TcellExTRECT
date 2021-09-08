@@ -1,12 +1,12 @@
+
+This software and associated documentation files (the “Software”) are protected by copyright. This Software is provided “as is” (at your own risk) for internal non-commercial academic research purposes only. Please read the Non-Commercial Academic License in detail before downloading a copy. By installing or using this Software, you agree to be bound by the terms and conditions of the Non-Commercial Academic License (included in the “non-commercial-academic-license.exe” file, available in the main directory of this software repository). 
+
+All commercial use of the Software or any modification, manipulation or derivative of the Software, including but not limited to transfer, sale or licence to a commercial third party or use on behalf of a commercial third party (including but not limited to use as part of a service supplied to any third party for financial reward) is strictly prohibited and requires a commercial use licence. For further information please email commercial@cancer.org.uk
+
 # T Cell ExTRECT version 1.0.0
 
 T Cell Exome TREC Tool (T Cell ExTRECT) is an R package to calculate T cell fractions from WES data from hg19 or hg38 aligned genomes.
 
-## License
-
-T Cell ExTRECT is free for academic use.
-
-INSERT LICENSE
 
 ## Instalation guide
 
@@ -78,7 +78,7 @@ The output of `runTcellExTRECT` is a data frame containing 5 columns:
 * `sample` - the name of the sample run
 * `TCRA.tcell.fraction` - The estimated fraction of the sample that are T cells
 * `TCRA.tcell.fraction.lwr` and `TCRA.tcell.fraction.upr` - The 95\% confindence interval values of the estimated T cell fraction
-* `qcFit` - A qc value describing the noise in the fit of the GAM model used to estimate the T cell fraction. Minimum value is `1` which represents a sample with a clear signal and little noise, if this value is `>4` a warning message will be output and viewing of the GAM model using `plotTcellExTRECT` (see below) is recommended.
+* `qcFit` - A QC value describing the noise in the fit of the GAM model used to estimate the T cell fraction. Minimum value is `1` which represents a sample with a clear signal and little noise, if this value is `>4` a warning message will be output and viewing of the GAM model using `plotTcellExTRECT` (see below) is recommended.
 
 We can also visualise the calculated log ratio from T Cell ExTRECT, this can be very useful to check that everything is working. The following produces the pre and post GC corrected versions of the log ratio within the *TCRA* loci, reads are coloured by the class of VDJ segment they are, e.g. *TCRA-V* segments are blue. Note that the TCRA loci also includes segments related to TCR delta (*TCRD* or *TRD*), e.g. *TCRD-V*. Vertical dotted lines represent the regions of the genome used for the normalised baseline (Norm region start and Norm region end) as well as the 'Focal region' that is used in the calculation of the *TCRA* fraction as the location we expect to see maximum signal.
 
