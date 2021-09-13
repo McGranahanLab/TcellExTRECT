@@ -17,7 +17,7 @@ T cell ExTRECT can either be installed from github using the `install_github()` 
 ```r
 # install.packages('devtools')
 library(devtools)
-install_github("McGranahanLab/TcellExTRECT/")
+install_github("McGranahanLab/TcellExTRECT")
 
 ```
 
