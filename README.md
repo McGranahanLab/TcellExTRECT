@@ -5,7 +5,7 @@ All commercial use of the Software or any modification, manipulation or derivati
 
 # T Cell ExTRECT version 1.0.0
 
-T Cell Exome TREC Tool (T Cell ExTRECT) is an R package to calculate T cell fractions from WES data from hg19 or hg38 aligned genomes. 
+T Cell Exome TREC Tool (T Cell ExTRECT) is an R package to calculate T cell fractions from WES data from hg19 or hg38 aligned genomes. For more details on the method and use of T cell ExTRECT please read our publication *Using DNA sequencing data to quantify T cell fraction and therapy response. Bentham et al. Nature (2021) *[https://www.nature.com/articles/s41586-021-03894-5]/
 
 Please note that T cell ExTRECT currently does not support use on WGS or other non-WES data.
 
@@ -46,7 +46,7 @@ First take an aligned bam file (hg38 or hg19) of your choice
 example_bam <- '/path/to/file.bam'
 ```
 
-Then use the pre-defined *TCRA* gene segments in the `tcra_seg_hg19` or `tcra_seg_hg38` data file to extract the coverage values. 
+Then use the pre-defined *TCRA* (also known as [*TRA*](https://www.genecards.org/cgi-bin/carddisp.pl?gene=TRA])) gene segments in the `tcra_seg_hg19` or `tcra_seg_hg38` data file to extract the coverage values. 
 
 ```r
 data("tcra_seg_hg19")
