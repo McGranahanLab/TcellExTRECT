@@ -9,6 +9,10 @@
 
 getCovFromBam <- function(bamPath, outPath, vdj.seg){
   # Requires samtools to be installed and working!
+  if(length(bamPath) != 1){
+    stop('Please only input one bam file at a time')
+  }
+
   if(!(file.exists(bamPath))){
     stop('Can not find bam file')
   }
