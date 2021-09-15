@@ -16,7 +16,7 @@ adjustTcellExTRECT <- function(TCRA.out, purity, TCRA.cn, trustPurity = TRUE){
   TCRA.tcell.fraction.adj <- TCRA.tcell.fraction.adj.lwr <-TCRA.tcell.fraction.adj.upr <- NULL
 
   # check purity is correct
-  if(any(purity) > 1 | any(purity) < 0) stop('purity needs to be between 0 and 1')
+  if(any(purity > 1) | any(purity < 0)) stop('purity needs to be between 0 and 1')
 
   TCRA.out$purity <- purity
   TCRA.out$TCRA.cn <- TCRA.cn

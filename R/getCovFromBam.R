@@ -23,7 +23,7 @@ getCovFromBam <- function(bamPath, outPath, vdj.seg){
   bai.path <- paste0(bamPath,'.bai')
   bai.path2 <- paste0(gsub('.bam','',bamPath),'.bai')
   if(!(file.exists(bai.path) | file.exists(bai.path2))){
-    stop('No index bai file found for bam, please index first before preceding')
+    stop('No index bai file found for bam, please index first before proceeding')
   }
 
   # Check if bam has chr or not before
