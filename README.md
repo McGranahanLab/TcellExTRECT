@@ -5,8 +5,9 @@ All commercial use of the Software or any modification, manipulation or derivati
 
 # T Cell ExTRECT version 1.0.0
 
-T Cell Exome TREC Tool (T Cell ExTRECT) is an R package to calculate T cell fractions from WES data from hg19 or hg38 aligned genomes.
+T Cell Exome TREC Tool (T Cell ExTRECT) is an R package to calculate T cell fractions from WES data from hg19 or hg38 aligned genomes. 
 
+Please note that T cell ExTRECT currently does not support use on WGS or other non-WES data.
 
 ## Instalation guide
 
