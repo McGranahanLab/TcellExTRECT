@@ -3,7 +3,7 @@ This software and associated documentation files (the “Software”) are protec
 
 All commercial use of the Software or any modification, manipulation or derivative of the Software, including but not limited to transfer, sale or licence to a commercial third party or use on behalf of a commercial third party (including but not limited to use as part of a service supplied to any third party for financial reward) is strictly prohibited and requires a commercial use licence. For further information please email commercial@cancer.org.uk
 
-# T Cell ExTRECT version 1.0.0
+# T Cell ExTRECT version 1.0.1
 
 T Cell Exome TREC Tool (T Cell ExTRECT) is an R package to calculate T cell fractions from WES data from hg19 or hg38 aligned genomes. For more details on the method and use of T cell ExTRECT please read our publication [*Using DNA sequencing data to quantify T cell fraction and therapy response. Bentham et al. Nature (2021)*](https://www.nature.com/articles/s41586-021-03894-5).
 
@@ -72,7 +72,15 @@ TCRA.out <- runTcellExTRECT(cov_example, TCRA_exons_hg19, tcra_seg_hg19, 'hg19')
 TCRA.out
 ```
 
-The `cov_example` data frame is an inbuilt example of coverage reads from the *TCRA* locus. Different capture kits have different exon positions and not all capture kits cover the *TCRA* locus. The `TCRA_exons_hg19` data contains exon locations from the Agilent v4/5 exome capture kits for genomes aligned to hg10. The TcellExTRECT package also comes with data for hg38 Agilent v4/5 genomes (`TCRA_exons_hg38`) and an exon set for Nimblegen kits `TCRA_exons_nimblegen_hg19`, more will be added soon or can be requested!
+The `cov_example` data frame is an inbuilt example of coverage reads from the *TCRA* locus. Different capture kits have different exon positions and not all capture kits cover the *TCRA* locus. The `TCRA_exons_hg19` data contains exon locations from the Agilent v4/5 exome capture kits for genomes aligned to hg19. The TcellExTRECT package also comes with data for hg38 Agilent v4/5 genomes (`TCRA_exons_hg38`) and an exon set for Nimblegen kits `TCRA_exons_nimblegen_hg19` and `TCRA_exons_nimblegen_hg38`. For other capture kits a data frame can be created using the `CreateExonDFBed` function, e.g. :
+
+```r
+bed.file <- PATH_TO_BED
+
+TCRA_exons_hg19_custom <- CreateExonDFBed(bed.file, 'hg19')
+```
+
+**Note that if you are using a capture kit not officially supported by T cell ExTRECT there may be unknown biases or not sufficient number of exons with coverage to calculate the *TCRA* T cell fraction.** 
 
 The output of `runTcellExTRECT` is a data frame containing 5 columns:
 
@@ -108,5 +116,3 @@ TCRA.df <- exonsTcellExTRECT(cov_example, TCRA_exons_hg19, tcra_seg_hg19, 'hg19'
 ```
 
 The option `summariseExons = TRUE` will return a smaller data frame summarised using the median value over the input exons. This function is intended to be used for additional QC checks on the exons used but could also be used for manual plotting.
-
-

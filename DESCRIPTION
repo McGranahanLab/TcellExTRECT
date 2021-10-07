@@ -1,7 +1,7 @@
 Package: TcellExTRECT
 Type: Package
 Title: T cell Exome TREC Tool
-Version: 1.0.0
+Version: 1.0.1
 Author: Robert Bentham
 Maintainer: Robert Bentham <robert.bentham.11@ucl.ac.uk>
 Description: T Cell Exome TREC Tool (T Cell ExTRECT) is an R package to calculate T cell fractions from WES data from hg19 or hg38 aligned genomes.
