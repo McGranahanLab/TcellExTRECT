@@ -26,7 +26,9 @@ createExonDFBed <- function(pathToBed, hg19or38 = 'hg19'){
     dplyr::mutate(X2 = as.numeric(X2)) %>%
     dplyr::filter(X2 > tcra_start) %>%
     dplyr::mutate(X3 = as.numeric(X3)) %>%
-    dplyr::filter(X3 < tcra_end)
+    dplyr::filter(X3 < tcra_end) %>%
+    dplyr::select(X1, X2, X3) %>%
+    dplyr::mutate(X1 = 'chr14')
 
   return(output.df)
 }
