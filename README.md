@@ -72,12 +72,12 @@ TCRA.out <- runTcellExTRECT(cov_example, TCRA_exons_hg19, tcra_seg_hg19, 'hg19')
 TCRA.out
 ```
 
-The `cov_example` data frame is an inbuilt example of coverage reads from the *TCRA* locus. Different capture kits have different exon positions and not all capture kits cover the *TCRA* locus. The `TCRA_exons_hg19` data contains exon locations from the Agilent v4/5 exome capture kits for genomes aligned to hg19. The TcellExTRECT package also comes with data for hg38 Agilent v4/5 genomes (`TCRA_exons_hg38`) and an exon set for Nimblegen kits `TCRA_exons_nimblegen_hg19` and `TCRA_exons_nimblegen_hg38`. For other capture kits a data frame can be created using the `CreateExonDFBed` function, e.g. :
+The `cov_example` data frame is an inbuilt example of coverage reads from the *TCRA* locus. Different capture kits have different exon positions and not all capture kits cover the *TCRA* locus. The `TCRA_exons_hg19` data contains exon locations from the Agilent v4/5 exome capture kits for genomes aligned to hg19. The TcellExTRECT package also comes with data for hg38 Agilent v4/5 genomes (`TCRA_exons_hg38`) and an exon set for Nimblegen kits `TCRA_exons_nimblegen_hg19` and `TCRA_exons_nimblegen_hg38`. For other capture kits a data frame can be created using the `createExonDFBed` function, e.g. :
 
 ```r
 bed.file <- PATH_TO_BED
 
-TCRA_exons_hg19_custom <- CreateExonDFBed(bed.file, 'hg19')
+TCRA_exons_hg19_custom <- createExonDFBed(bed.file, 'hg19')
 ```
 
 **Note that if you are using a capture kit not officially supported by T cell ExTRECT there may be unknown biases or not sufficient number of exons with coverage to calculate the *TCRA* T cell fraction.** 
