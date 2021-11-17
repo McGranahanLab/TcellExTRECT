@@ -42,6 +42,7 @@ runTcellExTRECT <- function(vdj.region.df, exons.selected,
 
   # 1. Check VDJ file:
   if(dim(vdj.region.df)[1] == 0){
+    warning('vdj.region.df contains no rows')
     return(NULL)
   }
 
@@ -60,6 +61,9 @@ runTcellExTRECT <- function(vdj.region.df, exons.selected,
   vdj.logR.df <- vdj.logR.df[!is.na(vdj.logR.df$Ratio), ]
 
   if(dim(vdj.logR.df)[1] == 0 | length(exon.remove) > 30){
+    warning(paste0(length(exon.remove),
+                   ' exons removed due to low depth and number of coverage positions = ',
+                   dim(vdj.logR.df)[1]),'.\n Sample failed QC due to number of exons removed, try lowereing median.thresh if depth in sample is low.')
     return(NA)}
 
   if(GC_correct){
