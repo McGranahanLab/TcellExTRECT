@@ -18,7 +18,8 @@
 plotTcellExTRECT <- function(vdj.region.df, exons.selected,
                              vdj.seg, hg19_or_38, exons.to.use = NULL,
                              median.k = 50, median.thresh = 15,
-                             sample_name = '',txt.size = 4, txt.height = 1.5){
+                             sample_name = '', path_name = '',
+                             txt.size = 4, txt.height = 1.5){
 
   pos <- Ratio <-  TRA_segment_goodname <- Ratio.gc.correct <- NULL
 
@@ -152,8 +153,10 @@ plotTcellExTRECT <- function(vdj.region.df, exons.selected,
              y =  txt.height, label = "Norm region \n end", size = txt.size)
 
 
-  print(p1)
-  print(p2)
+
+  ggsave(paste0(sample_name, '.pdf'), p1, path=path_name)
+  ggsave(paste0(sample_name, '_corr.pdf'), p2, path=path_name)
+
 
 }
 
