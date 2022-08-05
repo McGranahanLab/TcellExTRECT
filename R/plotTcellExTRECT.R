@@ -11,7 +11,7 @@
 #' @param txt.size size of annotation text
 #' @param txt.height location on y axis of annotation txt
 #' @return data frame of TCRA T cell fractions with 95% CI
-#' @importFrom ggplot2 ggplot aes geom_point geom_smooth geom_vline annotate theme_bw xlab ylab scale_colour_manual ggtitle
+#' @importFrom ggplot2 ggplot aes geom_point geom_smooth geom_vline annotate theme_bw xlab ylab scale_colour_manual ggtitle ggsave
 #' @name plotTcellExTRECT
 #' @export
 
