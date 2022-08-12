@@ -6,6 +6,8 @@
 #' @param hg19_or_38 hg19 or hg38 version of genome
 #' @param exons.to.use option to manually select which exons to use (defaults to all)
 #' @param sample_name name of sample run
+#' @param file_name name of file to save plot of TCRA loci (pre GC correction)
+#' @param file_name_corrected name of file to save plot of TCRA loci (post GC correction)
 #' @param median.k rolling median window
 #' @param median.thresh threshold to remove exons with low coverage
 #' @param txt.size size of annotation text
@@ -15,11 +17,18 @@
 #' @name plotTcellExTRECT
 #' @export
 
-plotTcellExTRECT <- function(vdj.region.df, exons.selected,
-                             vdj.seg, hg19_or_38, exons.to.use = NULL,
-                             median.k = 50, median.thresh = 15,
-                             sample_name = '', path_name = '',
-                             txt.size = 4, txt.height = 1.5){
+plotTcellExTRECT <- function(vdj.region.df, 
+                            exons.selected,
+                            vdj.seg, 
+                            hg19_or_38, 
+                            exons.to.use = NULL,
+                            median.k = 50, 
+                            median.thresh = 15,
+                            sample_name = '', 
+                            file_name = '',
+                            file_name_corrected = '',
+                            txt.size = 4, 
+                            txt.height = 1.5){
 
   pos <- Ratio <-  TRA_segment_goodname <- Ratio.gc.correct <- NULL
 
@@ -154,8 +163,8 @@ plotTcellExTRECT <- function(vdj.region.df, exons.selected,
 
 
 
-  ggsave(paste0(sample_name, '.pdf'), p1, path=path_name)
-  ggsave(paste0(sample_name, '_corr.pdf'), p2, path=path_name)
+  ggsave(file_name, p1)
+  ggsave(file_name_corrected, p2)
 
 
 }
