@@ -18,8 +18,8 @@ calcQCvalue <- function(tumour.logR, segs, GC_correct = TRUE, ci_type = 'simulta
 
   fit.model <- confint(gam.model, parm = "s(pos)",
                        partial_match = TRUE, type = ci_type,
-                       newdata = seq(segs[1,2],
-                                     segs[1,3],by=100), shift = TRUE)
+                       data = data.frame(pos = seq(segs[1,2],segs[1,3],by=100)),
+                       shift = TRUE)
   xz <- zoo::as.zoo(fit.model$est)
 
   rx.max <-zoo::rollapply(xz, 3, function(x) which.max(x)==2)

@@ -32,9 +32,9 @@ baselineAdj <- function(vdj_logR_input, vdj_seg, GCcorrect = TRUE){
 
 
   adjust.fit.model <- confint(adjust.model, parm = "s(pos)",
-                                           partial_match = TRUE, type = 'simultaneous',
-                                           newdata = seq(vdj_seg[2,2], vdj_seg[2,3],by=100),
-                                           shift = TRUE)
+                              partial_match = TRUE, type = 'simultaneous',
+                              data = data.frame(pos = seq(vdj_seg[2,2], vdj_seg[2,3],by=100)),
+                              shift = TRUE)
   fit.loc <- which(adjust.fit.model$pos > vdj_seg[2,2] & adjust.fit.model$pos < vdj_seg[2,3])
   adjust.baseline.value2 <- list(mean(adjust.fit.model$est[fit.loc]),
                                  mean(adjust.fit.model$upper[fit.loc]) - mean(adjust.fit.model$est[fit.loc]))

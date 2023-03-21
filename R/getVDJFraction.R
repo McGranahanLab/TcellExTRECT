@@ -24,7 +24,8 @@ getVDJFraction <- function(tumour.logR, segs, norm.ci.95,
 
   fit.model <- confint(tumour.genomic.region.model, parm = "s(pos)",
                                    partial_match = TRUE, type = ci_type,
-                       newdata = seq(segs[2,2], segs[2,3],by=100), shift = TRUE)
+                       data = data.frame(pos = seq(segs[2,2], segs[2,3],by=100)),
+                       shift = TRUE)
   fit.loc <- which(fit.model$pos > focal.start & fit.model$pos < focal.end)
   if(length(fit.loc) == 0){
     fit.loc <- c(which(fit.model$pos > focal.start)[1]-1,
