@@ -6,19 +6,29 @@
 #' @param hg19_or_38 hg19 or hg38 version of genome
 #' @param exons.to.use option to manually select which exons to use (defaults to all)
 #' @param sample_name name of sample run
+#' @param file_name name of file to save plot of TCRA loci (pre GC correction)
+#' @param file_name_corrected name of file to save plot of TCRA loci (post GC correction)
 #' @param median.k rolling median window
 #' @param median.thresh threshold to remove exons with low coverage
 #' @param txt.size size of annotation text
 #' @param txt.height location on y axis of annotation txt
 #' @return data frame of TCRA T cell fractions with 95% CI
-#' @importFrom ggplot2 ggplot aes geom_point geom_smooth geom_vline annotate theme_bw xlab ylab scale_colour_manual ggtitle
+#' @importFrom ggplot2 ggplot aes geom_point geom_smooth geom_vline annotate theme_bw xlab ylab scale_colour_manual ggtitle ggsave
 #' @name plotTcellExTRECT
 #' @export
 
-plotTcellExTRECT <- function(vdj.region.df, exons.selected,
-                             vdj.seg, hg19_or_38, exons.to.use = NULL,
-                             median.k = 50, median.thresh = 15,
-                             sample_name = '',txt.size = 4, txt.height = 1.5){
+plotTcellExTRECT <- function(vdj.region.df, 
+                            exons.selected,
+                            vdj.seg, 
+                            hg19_or_38, 
+                            exons.to.use = NULL,
+                            median.k = 50, 
+                            median.thresh = 15,
+                            sample_name = '', 
+                            file_name = '',
+                            file_name_corrected = '',
+                            txt.size = 4, 
+                            txt.height = 1.5){
 
   pos <- Ratio <-  TRA_segment_goodname <- Ratio.gc.correct <- NULL
 
@@ -152,8 +162,10 @@ plotTcellExTRECT <- function(vdj.region.df, exons.selected,
              y =  txt.height, label = "Norm region \n end", size = txt.size)
 
 
-  print(p1)
-  print(p2)
+
+  ggsave(file_name, p1)
+  ggsave(file_name_corrected, p2)
+
 
 }
 
