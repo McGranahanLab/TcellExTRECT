@@ -26,14 +26,27 @@ getVDJFraction <- function(tumour.logR, segs, norm.ci.95,
                                    partial_match = TRUE, type = ci_type,
                        data = data.frame(pos = seq(segs[2,2], segs[2,3],by=100)),
                        shift = TRUE)
+  
+  
+  if ("est" %in% colnames(fit.model)) {
+    estimate_col <- "est"
+    upper_col <- "upper"
+    lower_col <- "lower"
+  } else {
+    estimate_col <- ".estimate"
+    upper_col <- ".upper_ci"
+    lower_col <- ".lower_ci"
+  }
+  
+  
   fit.loc <- which(fit.model$pos > focal.start & fit.model$pos < focal.end)
   if(length(fit.loc) == 0){
     fit.loc <- c(which(fit.model$pos > focal.start)[1]-1,
                  which(fit.model$pos > focal.start)[1])}
 
-  tumour.log2.score <- mean(fit.model$est[fit.loc])
-  tumour.log2.score.min <- mean(fit.model$lower[fit.loc]) - norm.ci.95
-  tumour.log2.score.max <- mean(fit.model$upper[fit.loc]) + norm.ci.95
+  tumour.log2.score <- mean(fit.model[[estimate_col]][fit.loc])
+  tumour.log2.score.min <- mean(fit.model[[lower_col]][fit.loc]) - norm.ci.95
+  tumour.log2.score.max <- mean(fit.model[[upper_col]][fit.loc]) + norm.ci.95
 
   tumour.tcell.purity <- 1 - (2^tumour.log2.score)
   tumour.tcell.purity.max <- 1 - (2^tumour.log2.score.min)

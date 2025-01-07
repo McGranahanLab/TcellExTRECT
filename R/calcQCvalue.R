@@ -20,7 +20,14 @@ calcQCvalue <- function(tumour.logR, segs, GC_correct = TRUE, ci_type = 'simulta
                        partial_match = TRUE, type = ci_type,
                        data = data.frame(pos = seq(segs[1,2],segs[1,3],by=100)),
                        shift = TRUE)
-  xz <- zoo::as.zoo(fit.model$est)
+  
+  if ("est" %in% colnames(fit.model)) {
+    estimate_col <- "est"
+  } else {
+    estimate_col <- ".estimate"
+  }
+  
+  xz <- zoo::as.zoo(fit.model[[estimate_col]])
 
   rx.max <-zoo::rollapply(xz, 3, function(x) which.max(x)==2)
   rx.max.loc <- zoo::index(rx.max)[zoo::coredata(rx.max)]
@@ -28,10 +35,11 @@ calcQCvalue <- function(tumour.logR, segs, GC_correct = TRUE, ci_type = 'simulta
   rx.min <- zoo::rollapply(xz, 3, function(x) which.min(x)==2)
   rx.min.loc <- zoo::index(rx.min)[zoo::coredata(rx.min)]
 
-  all.minmax <- abs(c(fit.model$est[rx.min.loc],fit.model$est[rx.max.loc]))
+  all.minmax <- abs(c(fit.model[[estimate_col]][rx.min.loc],
+                      fit.model[[estimate_col]][rx.max.loc]))
 
-  all.min.norm <- fit.model$est[rx.min.loc]/max(all.minmax)
-  all.max.norm <- fit.model$est[rx.max.loc]/max(all.minmax)
+  all.min.norm <- fit.model[[estimate_col]][rx.min.loc]/max(all.minmax)
+  all.max.norm <- fit.model[[estimate_col]][rx.max.loc]/max(all.minmax)
 
   return(c(max(all.minmax),
            sum(abs(c(all.min.norm, all.max.norm)))))

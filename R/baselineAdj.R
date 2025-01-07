@@ -35,10 +35,21 @@ baselineAdj <- function(vdj_logR_input, vdj_seg, GCcorrect = TRUE){
                               partial_match = TRUE, type = 'simultaneous',
                               data = data.frame(pos = seq(vdj_seg[2,2], vdj_seg[2,3],by=100)),
                               shift = TRUE)
+  
+  if ("est" %in% colnames(adjust.fit.model)) {
+    estimate_col <- "est"
+    upper_col <- "upper"
+  } else {
+    estimate_col <- ".estimate"
+    upper_col <- ".upper_ci"
+  }
+  
   fit.loc <- which(adjust.fit.model$pos > vdj_seg[2,2] & adjust.fit.model$pos < vdj_seg[2,3])
-  adjust.baseline.value2 <- list(mean(adjust.fit.model$est[fit.loc]),
-                                 mean(adjust.fit.model$upper[fit.loc]) - mean(adjust.fit.model$est[fit.loc]))
-
+  
+  adjust.baseline.value2 <- list(mean(adjust.fit.model[[estimate_col]][fit.loc]),
+                                 mean(adjust.fit.model[[upper_col]][fit.loc]) - mean(adjust.fit.model[[estimate_col]][fit.loc]))
+  
+  
   adjust.value <- max(adjust.baseline.value[[1]], adjust.baseline.value2[[1]])
   ci.95.value <- ifelse(adjust.baseline.value2[[1]] > adjust.baseline.value[[1]],
                         adjust.baseline.value2[[2]], adjust.baseline.value[[2]])
